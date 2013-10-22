@@ -1,0 +1,2 @@
+grub> root (hd0,0)
+grub> setup (hd0)
