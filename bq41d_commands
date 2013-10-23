@@ -1,0 +1,11 @@
+bq41d asbman stop # Остановка WebSpeed
+bq41d dbipcs # Подключенные актуальные быза
+bq41d stop # Выключение базы
+bq41d backup # Бэкап базы данных
+bq41d truncate # Очистка b1 файла базы данных
+bq41d restore
+1) Куда делается рестор?
+*
+2) Откуда делаем рестор?
+/qbis/quit41d/common/backup/file_name
+
