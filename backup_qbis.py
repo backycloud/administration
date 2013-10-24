@@ -6,63 +6,58 @@ import smtplib
 import email.utils
 import base64
 from email.mime.text import MIMEText
+import subprocess
 
-#Потовый ящики
-from_addr = 'test@test.ru'
-to_addrs = 'test@test.ru'
-
-#Определяем дату
-DATESMTP = time.strftime(" %d %b %Y в %H:%M:%S")
-DATE = time.strftime('%d.%m.%Y')
-
-#Параметры авторизации
-#username = 'admin'
-#Дешифруем пароль
+#os.system ("bq41d dbipcs | grep main")
 p = "R2NnaHk2NjY="
 pwd = p.decode('base64')
 
-#Поехали!
-#Сохраняем нашу БД или все бд.
-def mysql ():
+def stop():
+command = "bq41d dbipcs | grep main"
+proc = subprocess.Popen(command,stdout=subprocess.PIPE,shell=True)
+(dbipcs, err) = proc.communicate()
+outwithoutreturn = dbipcs.rstrip('\n')
+print dbipcs 
 
-  DES = '/home/admin/' #Директория куда покладутся сохранения
+if len(dbipcs) > 1:
+  command = "bq41d stop | grep "Please enter password for dba"
+  proc = subprocess.Popen(command,stdout=subprocess.PIPE,shell=True)
+  (stop, err) = proc.communicate()
+  outwithoutreturn = stop.rstrip('\n')
+  print stop
+    if len(stop) > 1:
+      command = "dby"
+else:
+  print "x"
+  
 
-  BD = ">" + " " + DES + DATE + ".sql"
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*- # �^�одде�^�жка в �^�айле ки�^�илли�^��^
+import os,time
+#import smtplib
+#import email.utils
+import base64
+#from email.mime.text import MIMEText
+import subprocess
 
-  os.system("mysqldump --all-databases -uroot -p"+" %pwd "+" "+BD+" ") #Сохраняем базы
+#os.system ("bq41d dbipcs | grep main")
+#p = "R2NnaHk2NjY="
+#pwd = p.decode('base64')
 
-mysql ()
-#Сохраняем пользовательские диреткории
-def user_files ():
+#def stop():
+dbcheck = "bq41d dbipcs | grep main"
+proch = subprocess.Popen(dbcheck,stdout=subprocess.PIPE,shell=True)
+(dbipcs, err) = proch.communicate()
+outwithoutreturn = dbipcs.rstrip('\n')
+print dbipcs
 
-  DES = "/home/admin/" # директория куда покладутся сохранения
+if len(dbipcs) > 1:
 
-  SORS = "/var/www/" # Что копировать
-
-  FIL = DES + DATE + ".tar.bz2"
-
-  os.system("tar -cjf"+" "+FIL+" "+SORS+" ") #Создаем архив
-
-user_files()
-
-def delete_old ():
-  os.system ("find /home/admin/ -name *.tar.bz2 -mtime +14 -delete")
-  os.system ("find /home/admin/ -name *.sql -mtime +14 -delete")
-
-delete_old()#Тело письма
-text = 'Резервация окончена:'+DATESMTP
-
-#Указываем кодировку
-msg = MIMEText(text, "", "utf-8")
-
-#Создаем заголовок сообщения
-msg['To'] = email.utils.formataddr(('Кому', to_addrs))
-msg['From'] = email.utils.formataddr(('admin@admin.ru', from_addr))
-msg['Subject'] = 'Резервация окончена!'
-
-#Отправка письма по завершению.
-server = smtplib.SMTP('mail.mail.ru:25')
-server.starttls()
-#server.login(username,pwd)
-server.sendmail(from_addr, to_addrs, msg.as_string())
-server.quit()
+        shell = os.system ("bq41d stop")
+        b  = int('yes\n')
+        shell.stdin.write(b)
+        #dbstop = "bq41d stop"
+        #procs = subprocess.Popen(dbstop.stdin.write("yes\n"))
+        #procs.stdin.write("yes\n")
+else:
+     	print "2"
